@@ -785,3 +785,336 @@ app.conf.beat_schedule = {
             <table>
                 <tr>
                     <th>Entity</th>
+                    <th>Count</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Companies</td>
+                    <td>50</td>
+                    <td>Unique names and slugs</td>
+                </tr>
+                <tr>
+                    <td>Users</td>
+                    <td>250</td>
+                    <td>5 per company (1 owner, 4 members)</td>
+                </tr>
+                <tr>
+                    <td>Workspaces</td>
+                    <td>1,000</td>
+                    <td>20 per company with realistic names</td>
+                </tr>
+                <tr>
+                    <td>Notes</td>
+                    <td>500,000</td>
+                    <td>500 per workspace with varied content</td>
+                </tr>
+                <tr>
+                    <td>Tags</td>
+                    <td>100</td>
+                    <td>Assigned randomly (1-5 per note)</td>
+                </tr>
+                <tr>
+                    <td>Votes</td>
+                    <td>~100,000</td>
+                    <td>On public notes only</td>
+                </tr>
+            </table>
+
+            <h3>Manual Testing Checklist</h3>
+            <ul>
+                <li>User registration and JWT authentication ✓</li>
+                <li>Login with seeded credentials ✓</li>
+                <li>Create notes in different workspaces ✓</li>
+                <li>Toggle public/private visibility ✓</li>
+                <li>Save and publish drafts ✓</li>
+                <li>Search notes by title ✓</li>
+                <li>Sort public notes (new, old, upvotes, downvotes) ✓</li>
+                <li>Vote on public notes ✓</li>
+                <li>Edit notes and verify history creation ✓</li>
+                <li>View history entries ✓</li>
+                <li>Restore previous versions ✓</li>
+                <li>Delete notes ✓</li>
+                <li>Role-based access control (owner vs member) ✓</li>
+            </ul>
+        </div>
+
+        <!-- Slide 13: API Endpoints -->
+        <div class="slide">
+            <h2>🔌 API Endpoints</h2>
+            <table>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Method</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>/api/token/</td>
+                    <td>POST</td>
+                    <td>Login and get JWT tokens</td>
+                </tr>
+                <tr>
+                    <td>/api/token/refresh/</td>
+                    <td>POST</td>
+                    <td>Refresh access token</td>
+                </tr>
+                <tr>
+                    <td>/api/register/</td>
+                    <td>POST</td>
+                    <td>User registration</td>
+                </tr>
+                <tr>
+                    <td>/api/companies/</td>
+                    <td>GET</td>
+                    <td>List all companies</td>
+                </tr>
+                <tr>
+                    <td>/api/workspaces/</td>
+                    <td>GET, POST</td>
+                    <td>List/create workspaces</td>
+                </tr>
+                <tr>
+                    <td>/api/notes/public_notes/</td>
+                    <td>GET</td>
+                    <td>Public notes directory</td>
+                </tr>
+                <tr>
+                    <td>/api/notes/my_notes/</td>
+                    <td>GET</td>
+                    <td>Private dashboard notes</td>
+                </tr>
+                <tr>
+                    <td>/api/notes/</td>
+                    <td>POST</td>
+                    <td>Create new note</td>
+                </tr>
+                <tr>
+                    <td>/api/notes/{id}/</td>
+                    <td>GET, PATCH, DELETE</td>
+                    <td>Note CRUD operations</td>
+                </tr>
+                <tr>
+                    <td>/api/notes/{id}/vote/</td>
+                    <td>POST</td>
+                    <td>Upvote or downvote</td>
+                </tr>
+                <tr>
+                    <td>/api/notes/{id}/history/</td>
+                    <td>GET</td>
+                    <td>Get note history</td>
+                </tr>
+                <tr>
+                    <td>/api/notes/{id}/restore/</td>
+                    <td>POST</td>
+                    <td>Restore from history</td>
+                </tr>
+                <tr>
+                    <td>/api/tags/</td>
+                    <td>GET</td>
+                    <td>List all tags</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 14: Code Quality -->
+        <div class="slide">
+            <h2>💎 Code Quality & Best Practices</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Django Best Practices</h4>
+                    <p>• Models with proper Meta options<br>
+                    • Custom managers and model methods<br>
+                    • Signal-free architecture for simplicity<br>
+                    • DRY principle throughout codebase</p>
+                </div>
+                <div class="feature-item">
+                    <h4>DRF Best Practices</h4>
+                    <p>• Separate serializers for list/detail views<br>
+                    • Custom permissions for fine-grained control<br>
+                    • ViewSets for standard CRUD operations<br>
+                    • Proper HTTP status codes</p>
+                </div>
+                <div class="feature-item">
+                    <h4>React Best Practices</h4>
+                    <p>• Functional components with hooks<br>
+                    • Component reusability<br>
+                    • Proper state management<br>
+                    • Error boundaries</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Database Best Practices</h4>
+                    <p>• Normalized to 3NF<br>
+                    • Foreign key constraints<br>
+                    • Cascading deletes where appropriate<br>
+                    • SET_NULL for audit trail</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Security Best Practices</h4>
+                    <p>• Never commit secrets<br>
+                    • Environment variables for configuration<br>
+                    • Input validation at multiple layers<br>
+                    • Least privilege principle</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Documentation</h4>
+                    <p>• Comprehensive README<br>
+                    • Step-by-step setup guide<br>
+                    • ER diagram documentation<br>
+                    • API documentation ready</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Project Statistics -->
+        <div class="slide">
+            <h2>📊 Project Statistics</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="number">7</span>
+                    <span class="label">Database Models</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">15+</span>
+                    <span class="label">API Endpoints</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">8</span>
+                    <span class="label">React Pages</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">10+</span>
+                    <span class="label">Serializers</span>
+                </div>
+            </div>
+
+            <h3>File Structure Statistics</h3>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Files</th>
+                    <th>Lines of Code (Est.)</th>
+                </tr>
+                <tr>
+                    <td>Backend Models</td>
+                    <td>4</td>
+                    <td>~500</td>
+                </tr>
+                <tr>
+                    <td>Serializers</td>
+                    <td>4</td>
+                    <td>~400</td>
+                </tr>
+                <tr>
+                    <td>Views & Permissions</td>
+                    <td>5</td>
+                    <td>~600</td>
+                </tr>
+                <tr>
+                    <td>React Components</td>
+                    <td>8</td>
+                    <td>~800</td>
+                </tr>
+                <tr>
+                    <td>Configuration</td>
+                    <td>5</td>
+                    <td>~400</td>
+                </tr>
+                <tr>
+                    <td>Scripts & Tasks</td>
+                    <td>3</td>
+                    <td>~300</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>29+</strong></td>
+                    <td><strong>~3,000+</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 16: Challenges & Solutions -->
+        <div class="slide">
+            <h2>🎯 Challenges & Solutions</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Challenge: Seeding 500K Notes Efficiently</h4>
+                    <p><strong>Solution:</strong> Used bulk_create() operations with batch size of 1000, reducing insertion time from hours to minutes. Pre-generated all companies and workspaces first, then bulk-inserted notes.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Challenge: History Cleanup Without Server Stress</h4>
+                    <p><strong>Solution:</strong> Implemented Celery with Redis for background task processing. Scheduled cleanup at 2 AM using Celery Beat scheduler. Task runs asynchronously without blocking main server.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Challenge: Multi-Tenant Data Isolation</h4>
+                    <p><strong>Solution:</strong> Company-based filtering at queryset level. Every view filters by user.company automatically. Prevents cross-company data leaks through URL manipulation.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Challenge: Vote Count Performance</h4>
+                    <p><strong>Solution:</strong> Used database-level annotations (Count() with filters) instead of Python loops. Vote counts calculated in single query, cached by React Query on frontend.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Challenge: Search Performance on 500K Records</h4>
+                    <p><strong>Solution:</strong> Created indexes on title field. Used database ILIKE queries. Implemented pagination (50 per page). Search remains fast even with massive dataset.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Deployment Readiness -->
+        <div class="slide">
+            <h2>🚀 Production Deployment Readiness</h2>
+            <h3>Configuration Management</h3>
+            <ul>
+                <li>Environment variables for all sensitive data</li>
+                <li>.env file for local development</li>
+                <li>DEBUG mode toggle for production</li>
+                <li>Separate settings for different environments</li>
+            </ul>
+
+            <h3>Security Hardening</h3>
+            <ul>
+                <li>HTTPS redirect enabled in production</li>
+                <li>Secure cookie flags (HTTPOnly, Secure)</li>
+                <li>CSRF protection enabled</li>
+                <li>XSS protection headers</li>
+                <li>Content-Type sniffing prevention</li>
+            </ul>
+
+            <h3>Performance Optimization</h3>
+            <ul>
+                <li>Static file collection configured</li>
+                <li>Database connection pooling ready</li>
+                <li>Redis for caching (infrastructure ready)</li>
+                <li>Gunicorn/uWSGI compatible</li>
+            </ul>
+
+            <h3>Monitoring & Logging</h3>
+            <ul>
+                <li>Django logging configured</li>
+                <li>Celery task logging</li>
+                <li>Error tracking ready (Sentry compatible)</li>
+                <li>Database query logging</li>
+            </ul>
+        </div>
+
+        <!-- Slide 18: Time Management -->
+        <div class="slide">
+            <h2>⏰ Time Management</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>10:30 AM - 11:30 AM: Planning & Architecture (1 hour)</h4>
+                    <p>• Database schema design<br>
+                    • Technology stack selection<br>
+                    • Feature breakdown<br>
+                    • Architecture planning</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>11:30 AM - 2:00 PM: Backend Development (2.5 hours)</h4>
+                    <p>• Django project setup<br>
+                    • Models creation (7 models)<br>
+                    • Serializers & Views<br>
+                    • Authentication & Permissions<br>
+                    • Admin configuration</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2:00 PM - 2:30 PM: Data Seeding (30 minutes)</h4>
+                    <p>• Seeder script development<br>
+                    • Bulk operations optimization
