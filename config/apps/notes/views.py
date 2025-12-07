@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status, permissions, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.core.cache import cache
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Count, Q
 from .models import Note, Tag, Vote, NoteHistory
@@ -69,9 +70,13 @@ class NoteViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'], permission_classes=[permissions.AllowAny])
     def public_notes(self, request):
-        """List all public published notes"""
-        queryset = self.get_queryset()
+        """List all public published notes with caching"""
+        cache_key = f"public_notes:{request.query_params.get('ordering', '-created_at')}:page:{request.query_params.get('page', 1)}"
+        cached_data = cache.get(cache_key)
+        if cached_data:
+            return Response(cached_data)
 
+        queryset = self.get_queryset()
         # Apply ordering from query params
         ordering = request.query_params.get('ordering', '-created_at')
         if ordering == 'upvotes':
@@ -88,9 +93,12 @@ class NoteViewSet(viewsets.ModelViewSet):
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+            response = self.get_paginated_response(serializer.data).data
+            cache.set(cache_key, response, timeout=60 * 5)  # cache for 5 minutes
+            return Response(response)
 
         serializer = self.get_serializer(queryset, many=True)
+        cache.set(cache_key, serializer.data, timeout=60 * 5)
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
