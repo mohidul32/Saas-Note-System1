@@ -31,9 +31,24 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             'first_name', 'last_name', 'company_id'
         ]
 
+    def validate_email(self, value):
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("User with this email already exists.")
+        return value
+
+    def validate_username(self, value):
+        if User.objects.filter(username=value).exists():
+            raise serializers.ValidationError("Username already taken.")
+        return value
+
+    def validate_company_id(self, value):
+        if not Company.objects.filter(id=value, is_active=True).exists():
+            raise serializers.ValidationError("Company does not exist or is inactive.")
+        return value
+
     def validate(self, data):
         if data['password'] != data['password_confirm']:
-            raise serializers.ValidationError("Passwords do not match")
+            raise serializers.ValidationError({"password_confirm": "Passwords do not match"})
         return data
 
     def create(self, validated_data):
@@ -43,12 +58,9 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
 
         if company_id:
-            try:
-                company = Company.objects.get(id=company_id, is_active=True)
-                user.company = company
-                user.save()
-            except Company.DoesNotExist:
-                pass
+            company = Company.objects.get(id=company_id)
+            user.company = company
+            user.save()
 
         return user
 
