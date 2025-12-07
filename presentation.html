@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Notes System - Project Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin: 30px 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #764ba2;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #667eea;
+            margin: 25px 0 15px 0;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #666;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            text-align: center;
+            font-size: 1.2em;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .feature-item h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            min-width: 200px;
+            margin: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .stat-box .number {
+            font-size: 3em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .label {
+            font-size: 1.2em;
+        }
+
+        .checkmark {
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 12px 0;
+            font-size: 1.1em;
+            border-bottom: 1px solid #eee;
+        }
+
+        ul li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.3em;
+        }
+
+        .architecture-diagram {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            border: 2px solid #667eea;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .security-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .performance-badge {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .navigation button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .navigation button:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover {
+            background: #e9ecef;
+            transform: translateX(10px);
+        }
+
+        .timeline-item h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        @media print {
+            .navigation {
+                display: none;
+            }
+            .slide {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <h1>🚀 SaaS Notes System</h1>
+            <p class="subtitle">Multi-Tenant Workspace Notes Application</p>
+            <p class="subtitle">Production-Grade • Scalable • Secure</p>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="number">500K+</span>
+                    <span class="label">Notes Seeded</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">1,000+</span>
+                    <span class="label">Workspaces</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">100%</span>
+                    <span class="label">Functional</span>
+                </div>
+            </div>
+            <p class="author">Full-Stack Development Task | 10:30 AM - 6:00 PM</p>
+        </div>
+
+        <!-- Slide 2: Tech Stack -->
+        <div class="slide">
+            <h2>🛠️ Technology Stack</h2>
+            <div class="tech-stack">
+                <div class="tech-card">
+                    <h4>Backend</h4>
+                    <p>Django 4.2</p>
+                    <p>Django REST Framework</p>
+                    <p>Python 3.9+</p>
+                </div>
+                <div class="tech-card">
+                    <h4>Frontend</h4>
+                    <p>React 18</p>
+                    <p>React Router v6</p>
+                    <p>TanStack Query</p>
+                </div>
+                <div class="tech-card">
+                    <h4>Database</h4>
+                    <p>MySQL 8.0</p>
+                    <p>Optimized Indexes</p>
+                    <p>Normalized Schema</p>
+                </div>
+                <div class="tech-card">
+                    <h4>Background Jobs</h4>
+                    <p>Celery</p>
+                    <p>Redis</p>
+                    <p>Celery Beat</p>
+                </div>
+                <div class="tech-card">
+                    <h4>Authentication</h4>
+                    <p>JWT Tokens</p>
+                    <p>Simple JWT</p>
+                    <p>Token Refresh</p>
+                </div>
+                <div class="tech-card">
+                    <h4>Additional Tools</h4>
+                    <p>Faker (Seeding)</p>
+                    <p>CORS Headers</p>
+                    <p>Django Filters</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Architecture -->
+        <div class="slide">
+            <h2>🏗️ System Architecture</h2>
+            <div class="architecture-diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────┐
+│                    REACT FRONTEND (Port 3000)               │
+│  • Public Notes Directory  • Private Dashboard              │
+│  • Note Editor            • History Viewer                  │
+└────────────────────────┬────────────────────────────────────┘
+                         │ REST API (JWT)
+┌────────────────────────▼────────────────────────────────────┐
+│              DJANGO REST FRAMEWORK (Port 8000)              │
+│  • Authentication      • API Views                          │
+│  • Serializers        • Permissions                         │
+└────────────┬──────────────────────────┬─────────────────────┘
+             │                          │
+┌────────────▼──────────┐    ┌─────────▼──────────────────────┐
+│    MySQL Database     │    │  Celery + Redis                │
+│  • Companies          │    │  • History Cleanup (Daily 2AM) │
+│  • Workspaces         │    │  • Background Tasks            │
+│  • Notes (500K+)      │    └────────────────────────────────┘
+│  • Users, Tags        │
+│  • Votes, History     │
+└───────────────────────┘
+
+Multi-Tenant Structure:
+Company → Workspace → Note → Tags/Votes/History
+</pre>
+            </div>
+        </div>
+
+        <!-- Slide 4: Database Design -->
+        <div class="slide">
+            <h2>🗄️ Database Design</h2>
+            <h3>Entity Relationship Diagram</h3>
+            <div class="architecture-diagram">
+<pre>
+┌─────────────────┐
+│    Company      │ (Multi-tenant root)
+│  - id           │
+│  - name         │
+│  - slug (idx)   │
+└────┬────────┬───┘
+     │1       │1
+     │        │
+     │N       │N
+┌────▼────┐ ┌▼──────────┐
+│  User   │ │ Workspace │
+│- email  │ │ - name    │
+│- role   │ │ - slug    │
+└────┬────┘ └─┬─────────┘
+     │1       │1
+     │        │
+     │N       │N
+     └──────┬─▼──────────┐
+           ┌▼────────────┤
+           │    Note     │
+           │ - title     │
+           │ - content   │
+           │ - type      │◄────┐
+           │ - is_draft  │     │N:M
+           └─┬──┬────┬───┘     │
+             │  │    │      ┌──┴───┐
+           1:N│ N:M│ 1:N    │ Tag  │
+             │  │  │        └──────┘
+        ┌────▼┐ │  │
+        │Vote │ │  │
+        └─────┘ │  │
+           ┌────▼──▼─────────┐
+           │  NoteHistory    │
+           │  (7-day cache)  │
+           └─────────────────┘
+</pre>
+            </div>
+            <h3>Key Tables</h3>
+            <table>
+                <tr>
+                    <th>Table</th>
+                    <th>Purpose</th>
+                    <th>Indexes</th>
+                </tr>
+                <tr>
+                    <td>companies</td>
+                    <td>Multi-tenant root entity</td>
+                    <td>slug, name, is_active</td>
+                </tr>
+                <tr>
+                    <td>users</td>
+                    <td>Authentication & authorization</td>
+                    <td>email, company+role</td>
+                </tr>
+                <tr>
+                    <td>workspaces</td>
+                    <td>Note containers per company</td>
+                    <td>company+slug, created_at</td>
+                </tr>
+                <tr>
+                    <td>notes</td>
+                    <td>Core content entity (500K+)</td>
+                    <td>title, type+draft, created_at</td>
+                </tr>
+                <tr>
+                    <td>votes</td>
+                    <td>Upvote/downvote system</td>
+                    <td>note+type, user</td>
+                </tr>
+                <tr>
+                    <td>note_history</td>
+                    <td>Version tracking (7-day)</td>
+                    <td>note+changed_at</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 5: Core Features -->
+        <div class="slide">
+            <h2>✨ Core Features Implemented</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Multi-Tenant Architecture</h4>
+                    <p>Complete isolation between companies with shared infrastructure</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Public/Private Notes</h4>
+                    <p>Granular visibility control with public directory listing</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Draft Mode</h4>
+                    <p>Save incomplete work without publishing</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Voting System</h4>
+                    <p>Upvote/downvote public notes across companies</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Tag Management</h4>
+                    <p>Many-to-many tag relationships for categorization</p>
+                </div>
+                <div class="feature-item">
+                    <h4>History Tracking</h4>
+                    <p>Automatic version history with 7-day retention</p>
+                </div>
+                <div class="feature-item">
+                    <h4>History Restore</h4>
+                    <p>Revert to any previous version within 7 days</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Role-Based Access</h4>
+                    <p>Owner and Member roles with different permissions</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Search & Filter</h4>
+                    <p>Fast title-based search with sorting options</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Requirements Fulfillment -->
+        <div class="slide">
+            <h2>✅ Requirements Fulfillment</h2>
+            <h3>Core Requirements</h3>
+            <ul>
+                <li>Multi-tenant system with Companies → Workspaces → Notes hierarchy</li>
+                <li>Note model with title, content, tags (M:M), type (public/private), timestamps</li>
+                <li>Voting system with upvotes/downvotes for public notes</li>
+                <li>Draft mode with visibility control</li>
+                <li>Complete database design with ER diagram</li>
+            </ul>
+
+            <h3>History System (7-Day Retention)</h3>
+            <ul>
+                <li>Automatic history creation on every note update</li>
+                <li>Stores previous content, timestamp, and user who made changes</li>
+                <li>Restore functionality to revert to previous versions</li>
+                <li>Auto-cleanup using Celery Beat (daily at 2 AM)</li>
+                <li>Zero server stress with background job offloading</li>
+            </ul>
+
+            <h3>Data Seeding</h3>
+            <ul>
+                <li>Seeded 1,000+ workspaces across 50 companies</li>
+                <li>Generated 500,000+ realistic notes with varied content</li>
+                <li>Created 100 tags with realistic associations</li>
+                <li>Added thousands of votes on public notes</li>
+                <li>Bulk operations for performance optimization</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: UI Implementation -->
+        <div class="slide">
+            <h2>🎨 User Interface</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Public Notes Directory</h4>
+                    <p>• Lists all public published notes<br>
+                    • Search by title<br>
+                    • Sort by: New, Old, Most Upvotes, Most Downvotes<br>
+                    • Shows workspace, company, tags, votes<br>
+                    • Pagination support</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Private Dashboard</h4>
+                    <p>• Owner-only workspace notes listing<br>
+                    • Title-based search<br>
+                    • View, Edit, Delete actions<br>
+                    • Draft status indicators<br>
+                    • Quick note creation</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Note Editor</h4>
+                    <p>• Create/Edit interface<br>
+                    • Workspace selector<br>
+                    • Public/Private toggle<br>
+                    • Draft mode checkbox<br>
+                    • Tag management<br>
+                    • Real-time validation</p>
+                </div>
+                <div class="feature-item">
+                    <h4>History Viewer</h4>
+                    <p>• Show all versions within 7 days<br>
+                    • Display timestamp and user<br>
+                    • Preview previous content<br>
+                    • One-click restore<br>
+                    • Confirm before restore</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Performance -->
+        <div class="slide">
+            <h2>⚡ Performance Optimizations</h2>
+            <h3>Database Level</h3>
+            <ul>
+                <li><span class="performance-badge">Indexes</span> Strategic indexes on frequently queried fields (company_id, note_type, created_at, title)</li>
+                <li><span class="performance-badge">Unique Constraints</span> Prevent duplicate data and improve query performance</li>
+                <li><span class="performance-badge">Select Related</span> Optimized foreign key queries with select_related()</li>
+                <li><span class="performance-badge">Prefetch Related</span> Efficient many-to-many queries with prefetch_related()</li>
+                <li><span class="performance-badge">Annotated Queries</span> Vote counts calculated at database level</li>
+                <li><span class="performance-badge">Bulk Operations</span> Seeder uses bulk_create() for 1000x faster insertion</li>
+            </ul>
+
+            <h3>API Level</h3>
+            <ul>
+                <li><span class="performance-badge">Pagination</span> 50 items per page to reduce payload size</li>
+                <li><span class="performance-badge">Filtering</span> Django-filter for efficient server-side filtering</li>
+                <li><span class="performance-badge">Query Optimization</span> Minimal database hits per request</li>
+                <li><span class="performance-badge">Serializer Efficiency</span> Optimized serializers with only required fields</li>
+            </ul>
+
+            <h3>Frontend Level</h3>
+            <ul>
+                <li><span class="performance-badge">React Query</span> Automatic caching and background refetching</li>
+                <li><span class="performance-badge">Lazy Loading</span> Components loaded on-demand</li>
+                <li><span class="performance-badge">Debounced Search</span> Reduces unnecessary API calls</li>
+            </ul>
+        </div>
+
+        <!-- Slide 9: Security -->
+        <div class="slide">
+            <h2>🔐 Security Implementation</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Authentication</h4>
+                    <p><span class="security-badge">JWT</span> Token-based authentication with access and refresh tokens<br>
+                    <span class="security-badge">Auto Refresh</span> Seamless token renewal on expiry</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Authorization</h4>
+                    <p><span class="security-badge">RBAC</span> Role-based access control (Owner/Member)<br>
+                    <span class="security-badge">Object-Level</span> Permission checks at object level</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Input Validation</h4>
+                    <p><span class="security-badge">DRF Serializers</span> Automatic validation and sanitization<br>
+                    <span class="security-badge">Type Checking</span> Strict data type enforcement</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Injection Prevention</h4>
+                    <p><span class="security-badge">Django ORM</span> Parameterized queries prevent SQL injection<br>
+                    <span class="security-badge">React</span> Auto-escaping prevents XSS attacks</p>
+                </div>
+                <div class="feature-item">
+                    <h4>CSRF Protection</h4>
+                    <p><span class="security-badge">Django CSRF</span> Built-in CSRF middleware<br>
+                    <span class="security-badge">JWT Tokens</span> Stateless authentication reduces CSRF risk</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Production Ready</h4>
+                    <p><span class="security-badge">HTTPS</span> SSL redirect in production<br>
+                    <span class="security-badge">Secure Cookies</span> HTTPOnly and Secure flags<br>
+                    <span class="security-badge">Headers</span> Security headers (XSS, Content-Type, Frame options)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: History System Deep Dive -->
+        <div class="slide">
+            <h2>📜 History System - 7 Day Retention</h2>
+            <h3>How It Works</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>1. Automatic Tracking</h4>
+                    <p>Every time a note is updated, the <code>save()</code> method automatically creates a history entry with the previous title and content.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2. Storage</h4>
+                    <p>History stores: previous title, previous content, timestamp, and the user who made the change.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>3. User Access</h4>
+                    <p>Users can view all history entries within 7 days and restore any previous version with one click.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>4. Automated Cleanup</h4>
+                    <p>Celery Beat scheduler runs daily at 2:00 AM to delete history entries older than 7 days.</p>
+                </div>
+            </div>
+
+            <h3>Implementation Details</h3>
+            <div class="code-block">
+# Celery Task (apps/notes/tasks.py)
+@shared_task
+def cleanup_old_history():
+    cutoff = now() - timedelta(days=7)
+    deleted = NoteHistory.objects.filter(
+        changed_at__lt=cutoff
+    ).delete()[0]
+    return deleted
+
+# Celery Beat Schedule (config/celery.py)
+app.conf.beat_schedule = {
+    'cleanup-old-history': {
+        'task': 'apps.notes.tasks.cleanup_old_history',
+        'schedule': crontab(hour=2, minute=0),  # Daily at 2 AM
+    }
+}
+            </div>
+
+            <h3>Why This Approach?</h3>
+            <ul>
+                <li><strong>Zero Server Stress:</strong> Cleanup runs in background worker, not main server</li>
+                <li><strong>Off-hours Execution:</strong> Scheduled at 2 AM when traffic is lowest</li>
+                <li><strong>Asynchronous:</strong> Doesn't block user requests</li>
+                <li><strong>Reliable:</strong> Celery ensures task completion even if worker restarts</li>
+                <li><strong>Scalable:</strong> Can handle millions of records without impacting performance</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11: Scalability -->
+        <div class="slide">
+            <h2>📈 Scalability Design</h2>
+            <h3>Database Scalability</h3>
+            <ul>
+                <li><strong>Normalized Schema:</strong> Eliminates data redundancy</li>
+                <li><strong>Strategic Indexes:</strong> Fast queries even with millions of records</li>
+                <li><strong>Partitioning Ready:</strong> Can partition by company_id or date</li>
+                <li><strong>Read Replicas:</strong> Architecture supports read/write splitting</li>
+            </ul>
+
+            <h3>Application Scalability</h3>
+            <ul>
+                <li><strong>Stateless Design:</strong> JWT tokens allow horizontal scaling</li>
+                <li><strong>API-First:</strong> Frontend/backend separation enables independent scaling</li>
+                <li><strong>Caching Ready:</strong> Redis infrastructure for caching layer</li>
+                <li><strong>Load Balancer Ready:</strong> Multiple API servers can serve requests</li>
+            </ul>
+
+            <h3>Future Enhancements</h3>
+            <ul>
+                <li>Redis caching for frequently accessed public notes</li>
+                <li>ElasticSearch for advanced full-text search</li>
+                <li>CDN for static assets</li>
+                <li>Database sharding by company_id</li>
+                <li>Microservices architecture for specific features</li>
+            </ul>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="number">∞</span>
+                    <span class="label">Companies</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">10M+</span>
+                    <span class="label">Notes Capable</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">100%</span>
+                    <span class="label">Uptime Ready</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Testing & Verification -->
+        <div class="slide">
+            <h2>🧪 Testing & Verification</h2>
+            <h3>Data Seeding Results</h3>
+            <table>
+                <tr>
+                    <th>Entity</th>
