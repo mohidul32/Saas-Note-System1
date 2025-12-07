@@ -32,7 +32,7 @@ class NoteListSerializer(serializers.ModelSerializer):
     created_by_name = serializers.CharField(source='created_by.full_name', read_only=True)
     upvotes = serializers.IntegerField(read_only=True)
     downvotes = serializers.IntegerField(read_only=True)
-    vote_count = serializers.IntegerField(read_only=True
+    vote_count = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Note
