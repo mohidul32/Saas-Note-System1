@@ -10,9 +10,19 @@ from .serializers import (
 )
 from .permissions import IsOwnerOrReadOnly, CanAccessNote
 
+# apps/notes/pagination.py
+from rest_framework.pagination import PageNumberPagination
+
+class MaxLimitPagination(PageNumberPagination):
+    page_size = 10               # default page size
+    page_size_query_param = 'limit'
+    max_page_size = 50           # maximum allowed
+
+
 
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
+    pagination_class = MaxLimitPagination  # add this line
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title']
     ordering_fields = ['created_at', 'updated_at', 'title']

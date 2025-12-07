@@ -5,10 +5,19 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Company
 from .serializers import CompanySerializer, CompanyListSerializer
 
+# Add MaxLimitPagination here directly
+from rest_framework.pagination import PageNumberPagination
+
+class MaxLimitPagination(PageNumberPagination):
+    page_size = 10               # default page size
+    page_size_query_param = 'limit'
+    max_page_size = 50           # maximum allowed
+
 
 class CompanyViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Company.objects.filter(is_active=True)
     serializer_class = CompanySerializer
+    pagination_class = MaxLimitPagination  # ← add this
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name', 'description']
